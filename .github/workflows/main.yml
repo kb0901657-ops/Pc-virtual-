@@ -1,0 +1,29 @@
+name: Monglithe Virtual PC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  windows-server:
+    name: Windows Server 2022
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - name: Exibir informações do Windows
+        shell: pwsh
+        run: |
+          Write-Host "Ambiente iniciado."
+          Get-ComputerInfo |
+            Select-Object WindowsProductName, WindowsVersion, OsArchitecture
+
+  windows-10:
+    name: Windows 10 (runner próprio)
+    runs-on: [self-hosted, Windows, X64, windows-10]
+    timeout-minutes: 30
+    steps:
+      - name: Exibir informações do Windows
+        shell: pwsh
+        run: |
+          Write-Host "Ambiente Windows 10 iniciado."
+          Get-ComputerInfo |
+            Select-Object WindowsProductName, WindowsVersion, OsArchitecture
